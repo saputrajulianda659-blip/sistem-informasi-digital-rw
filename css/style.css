@@ -178,7 +178,7 @@ input, select, textarea {
     top: 0;
     left: 0;
     height: 100vh;
-    z-index: 100;
+    z-index: 9999;
     transition: transform var(--transition-normal), width var(--transition-normal);
 }
 
@@ -255,6 +255,7 @@ input, select, textarea {
 
 .sidebar-backdrop {
     display: none;
+    z-index: 9998;
 }
 
 .sidebar-nav {
@@ -360,6 +361,21 @@ input, select, textarea {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+}
+
+/* Sidebar Logout Menu Item */
+.sidebar-logout-btn {
+    color: var(--danger-color, #ef4444) !important;
+}
+
+.sidebar-logout-btn:hover {
+    background-color: var(--danger-light, #fef2f2) !important;
+    color: var(--danger-color, #ef4444) !important;
+}
+
+.sidebar-logout-btn:hover i,
+.sidebar-logout-btn:hover span {
+    color: var(--danger-color, #ef4444) !important;
 }
 
 /* ==========================================================================
@@ -1607,10 +1623,20 @@ table tbody tr:hover, .data-table tbody tr:hover {
     color: var(--text-muted);
 }
 
-/* Floating AI Capsule Trigger Button */
-.ai-capsule-btn {
+/* Floating AI Assistant Widget & Capsule Trigger */
+#aiFloatingWidgetContainer {
+    z-index: 900 !important;
+}
+
+.ai-capsule-btn,
+#btnAiCapsuleTrigger {
+    z-index: 900 !important;
     background: linear-gradient(135deg, #4880FF 0%, #356BE5 100%) !important;
     box-shadow: 0 10px 25px -5px rgba(72, 128, 255, 0.45) !important;
+}
+
+#aiChatPopupWindow {
+    z-index: 901 !important;
 }
 
 /* ==========================================================================
@@ -1741,7 +1767,7 @@ table tbody tr:hover, .data-table tbody tr:hover {
         width: 280px !important;
         max-width: 85vw !important;
         height: 100vh !important;
-        z-index: 1050 !important;
+        z-index: 9999 !important;
         transform: translateX(-100%) !important;
         box-shadow: none;
         transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -1763,7 +1789,7 @@ table tbody tr:hover, .data-table tbody tr:hover {
         background-color: rgba(15, 23, 42, 0.6);
         backdrop-filter: blur(3px);
         -webkit-backdrop-filter: blur(3px);
-        z-index: 1040;
+        z-index: 9998 !important;
         opacity: 0;
         pointer-events: none;
         transition: opacity 0.3s ease;
@@ -1780,13 +1806,248 @@ table tbody tr:hover, .data-table tbody tr:hover {
         max-width: 100vw !important;
     }
 
+    /* Header / Navbar Mobile: Sejajar Rapi 1 Baris Horizontal */
     .navbar {
-        padding: 0 1rem;
-        height: 64px;
+        padding: 0 0.75rem;
+        height: 60px;
+        flex-wrap: nowrap;
+        gap: 0.5rem;
+    }
+
+    .navbar-left {
+        gap: 0.5rem;
+        flex-shrink: 0;
+    }
+
+    .navbar-right {
+        gap: 0.5rem;
+        flex-wrap: nowrap;
+        align-items: center;
+        flex-shrink: 0;
     }
 
     .dash-search-box {
         display: none; /* Hide topbar search on small mobile to give room to title & profile */
+    }
+
+    /* Tombol Profil User di Pojok Kanan Atas:
+       Sembunyikan teks nama user & role, tampilkan HANYA ikon bulat inisial dan ikon dropdown */
+    .navbar-user-profile {
+        padding: 3px 6px 3px 3px;
+        gap: 4px;
+        flex-shrink: 0;
+    }
+
+    .navbar-user-profile .user-meta-info,
+    .navbar-user-profile .user-name-text,
+    .navbar-user-profile .user-role-badge {
+        display: none !important;
+    }
+
+    .user-avatar-circle {
+        width: 34px;
+        height: 34px;
+        font-size: 0.8rem;
+    }
+
+    /* Ikon Theme Toggle & Notifikasi di HP agar proporsional */
+    .btn-theme-toggle,
+    .btn-notif {
+        width: 36px;
+        height: 36px;
+        font-size: 1.15rem;
+        flex-shrink: 0;
+    }
+
+    /* Tombol Logout di Header Mobile (OPSI 1): Tampilkan ikon saja (sembunyikan teks 'Logout') */
+    .btn-logout {
+        display: inline-flex !important;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 36px;
+        padding: 0 !important;
+        border-radius: 50% !important;
+        color: var(--danger-color, #ef4444) !important;
+        background: var(--background-body) !important;
+        border: 1px solid var(--border-color) !important;
+        font-size: 1.15rem !important;
+        flex-shrink: 0;
+    }
+
+    .btn-logout span {
+        display: none !important;
+    }
+
+    /* Dropdown Notifikasi Responsif di Layar HP */
+    .notification-dropdown {
+        width: 90vw !important;
+        max-width: 320px !important;
+        right: -50px !important;
+        top: 52px !important;
+        box-sizing: border-box !important;
+    }
+
+    .notification-header,
+    .notification-footer {
+        padding: 0.75rem 1rem !important;
+        box-sizing: border-box !important;
+    }
+
+    .notification-item {
+        padding: 0.75rem 1rem !important;
+        box-sizing: border-box !important;
+    }
+
+    /* Tombol Melayang Trigger (Tanya AI) di Layar HP - Spesifisitas ID Maksimal Anti-Hilang */
+    #aiFloatingWidgetContainer,
+    #aiFloatingWidgetContainer.hidden,
+    #aiFloatingWidgetContainer[style] {
+        display: block !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: none !important;
+        position: fixed !important;
+        bottom: 20px !important;
+        right: 20px !important;
+        z-index: 99999 !important;
+        pointer-events: auto !important;
+    }
+
+    #btnAiCapsuleTrigger,
+    #btnAiCapsuleTrigger.hidden,
+    #btnAiCapsuleTrigger[style],
+    .ai-capsule-btn,
+    .ai-floating-btn,
+    .chat-trigger,
+    .ai-trigger-btn {
+        display: flex !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: none !important;
+        position: fixed !important;
+        bottom: 20px !important;
+        right: 20px !important;
+        z-index: 99999 !important;
+        pointer-events: auto !important;
+        align-items: center !important;
+        justify-content: center !important;
+    }
+
+    /* Popup Kotak Chat AI Responsif & Proporsional di Layar HP */
+    #aiChatPopupWindow,
+    .ai-popup-window,
+    .ai-chat-popup,
+    .ai-modal {
+        position: fixed !important;
+        flex-direction: column !important;
+        width: 90vw !important;
+        min-width: unset !important;
+        max-width: 90vw !important;
+        left: 5vw !important;
+        right: auto !important;
+        top: 50% !important;
+        bottom: auto !important;
+        transform: translateY(-50%) !important;
+        animation: none !important;
+        height: auto !important;
+        max-height: 65vh !important;
+        min-height: unset !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        box-sizing: border-box !important;
+        border-radius: 16px !important;
+        overflow: hidden !important;
+        z-index: 100000 !important;
+    }
+
+    /* Paksa Muncul Saat Aktif / Dibuka */
+    #aiChatPopupWindow.active,
+    .ai-popup-window.active,
+    .ai-chat-popup.active,
+    .ai-modal.show,
+    .ai-modal.active,
+    .ai-chat-popup.show,
+    .ai-chat-popup.open,
+    .ai-popup-window.open,
+    #aiChatPopupWindow[style*="display: flex"],
+    .ai-popup-window[style*="display: flex"],
+    #aiChatPopupWindow[style*="display: block"],
+    .ai-popup-window[style*="display: block"],
+    #aiChatPopupWindow:not([style*="display: none"]):not([style*="display:none"]) {
+        display: flex !important;
+        flex-direction: column !important;
+        width: 90vw !important;
+        left: 5vw !important;
+        right: auto !important;
+        top: 50% !important;
+        bottom: auto !important;
+        transform: translateY(-50%) !important;
+        animation: none !important;
+        height: auto !important;
+        max-height: 65vh !important;
+    }
+
+    /* Area Pesan / Chat Body Tengah Bisa Di-scroll */
+    #aiWidgetChatBody,
+    .ai-chat-body,
+    .ai-messages,
+    .ai-widget-chat-body {
+        flex: 1 1 auto !important;
+        min-height: 0 !important;
+        overflow-y: auto !important;
+        padding: 10px 12px !important;
+        box-sizing: border-box !important;
+    }
+
+    /* Ukuran Font Pesan Chat AI di Layar HP (12px) */
+    #aiWidgetChatBody,
+    .ai-chat-body,
+    .ai-messages,
+    .ai-widget-chat-body,
+    .ai-chat-popup p,
+    .ai-modal p,
+    .ai-msg-row,
+    .ai-msg-row div,
+    .ai-msg-row p,
+    .ai-msg-row span,
+    .ai-msg-row li {
+        font-size: 12px !important;
+        line-height: 1.45 !important;
+    }
+
+    /* Ukuran Font Tombol Topik Cepat di Layar HP (11px) */
+    .ai-quick-btn,
+    .ai-topic-btn,
+    .quick-topic-btn {
+        font-size: 11px !important;
+        padding: 5px 10px !important;
+    }
+
+    /* Header & Kolom Input Tetap Menempel di Atas dan Bawah dengan Padding Rapat */
+    #aiChatPopupWindow > div:first-child,
+    .ai-popup-window > div:first-child {
+        flex-shrink: 0 !important;
+        padding: 10px 14px !important;
+    }
+
+    #aiChatPopupWindow > div:last-child,
+    .ai-popup-window > div:last-child,
+    .ai-chat-input-area,
+    .ai-input-wrapper {
+        flex-shrink: 0 !important;
+        padding: 8px 10px !important;
+        box-sizing: border-box !important;
+    }
+
+    #aiWidgetInput {
+        padding: 7px 12px !important;
+        font-size: 0.8125rem !important;
+    }
+
+    #btnAiWidgetSend {
+        width: 34px !important;
+        height: 34px !important;
     }
 
     .page-content {
@@ -2199,6 +2460,20 @@ html.dark .nav-item:hover i {
 html.dark .nav-item.active {
     background-color: var(--primary-color) !important;
     color: #ffffff !important;
+}
+
+html.dark .sidebar-logout-btn {
+    color: #f87171 !important;
+}
+
+html.dark .sidebar-logout-btn:hover {
+    background-color: rgba(239, 68, 68, 0.2) !important;
+    color: #fca5a5 !important;
+}
+
+html.dark .sidebar-logout-btn:hover i,
+html.dark .sidebar-logout-btn:hover span {
+    color: #fca5a5 !important;
 }
 
 html.dark .menu-toggle-btn {

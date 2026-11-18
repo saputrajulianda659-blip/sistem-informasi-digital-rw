@@ -196,6 +196,12 @@ export function renderSidebar(user) {
                 <span>Pengaturan Notifikasi</span>
             </a>
         ` : ''}
+
+        <div class="sidebar-section-title">Akun & Sesi</div>
+        <a href="javascript:void(0)" class="nav-item sidebar-logout-btn" id="btnSidebarLogout" role="button" title="Keluar dari sistem">
+            <i class="ph-bold ph-sign-out text-danger"></i>
+            <span class="text-danger font-semibold">Logout</span>
+        </a>
     `;
 
     const isCollapsed = typeof localStorage !== 'undefined' && localStorage.getItem('sidebar_collapsed') === 'true';

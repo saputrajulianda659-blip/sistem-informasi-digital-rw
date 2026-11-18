@@ -939,21 +939,30 @@ export function setupLayoutEvents() {
 
     // 3. Logout Handling with pending saves protection
     try {
+        const handleLogout = async (btn, e) => {
+            if (e) e.preventDefault();
+            try {
+                if (btn) {
+                    btn.style.pointerEvents = 'none';
+                    btn.innerHTML = `<i class="ph-bold ph-spinner animate-spin"></i> <span>Menyimpan...</span>`;
+                }
+                await waitForPendingSaves(6000);
+            } catch (err) {
+                console.warn('[Logout] Error waiting for pending saves:', err);
+            } finally {
+                logout();
+                window.location.hash = '#/login';
+            }
+        };
+
         const btnLogout = document.getElementById('btnLogout');
         if (btnLogout) {
-            btnLogout.addEventListener('click', async (e) => {
-                e.preventDefault();
-                try {
-                    btnLogout.style.pointerEvents = 'none';
-                    btnLogout.innerHTML = `<i class="ph-bold ph-spinner animate-spin"></i> <span>Menyimpan...</span>`;
-                    await waitForPendingSaves(6000);
-                } catch (err) {
-                    console.warn('[Logout] Error waiting for pending saves:', err);
-                } finally {
-                    logout();
-                    window.location.hash = '#/login';
-                }
-            });
+            btnLogout.addEventListener('click', (e) => handleLogout(btnLogout, e));
+        }
+
+        const btnSidebarLogout = document.getElementById('btnSidebarLogout');
+        if (btnSidebarLogout) {
+            btnSidebarLogout.addEventListener('click', (e) => handleLogout(btnSidebarLogout, e));
         }
     } catch (e) {
         console.warn("Logout event error:", e);
