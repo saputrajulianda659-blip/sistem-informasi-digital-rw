@@ -1,0 +1,329 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "Budi Santoso",
+      "role": "Super Admin",
+      "username": "budi",
+      "email": "budi@rwdigital.id",
+      "status": "Aktif"
+    },
+    {
+      "id": 2,
+      "name": "Bambang Mulyono",
+      "role": "Ketua RW",
+      "username": "bambang",
+      "email": "bambang@rwdigital.id",
+      "rw": "05",
+      "status": "Aktif"
+    },
+    {
+      "id": 3,
+      "name": "Ahmad Fauzi",
+      "role": "Ketua RT",
+      "username": "ahmad",
+      "email": "ahmad@rwdigital.id",
+      "rt": "01",
+      "rw": "05",
+      "status": "Aktif"
+    },
+    {
+      "id": 4,
+      "name": "Eko Prasetyo",
+      "role": "Ketua RT",
+      "username": "eko",
+      "email": "eko@rwdigital.id",
+      "rt": "02",
+      "rw": "05",
+      "status": "Aktif"
+    },
+    {
+      "id": 5,
+      "name": "Julianda Saputra",
+      "role": "Warga",
+      "username": "julianda",
+      "email": "saputrajulianda659@gmail.com",
+      "rt": "01",
+      "rw": "05",
+      "nik": "3201010101010002",
+      "status": "Aktif"
+    },
+    {
+      "id": 6,
+      "name": "Siti Aminah",
+      "role": "Warga",
+      "username": "siti",
+      "email": "siti@gmail.com",
+      "rt": "02",
+      "rw": "05",
+      "nik": "3201010101010003",
+      "status": "Aktif"
+    }
+  ],
+  "warga": [
+    {
+      "nik": "3201010101010001",
+      "nama": "Budi Santoso",
+      "no_kk": "3201011111111111",
+      "tempat_lahir": "Jakarta",
+      "tanggal_lahir": "1980-01-01",
+      "jenis_kelamin": "L",
+      "alamat": "Jl. Merdeka No. 1",
+      "rt": "01",
+      "rw": "05",
+      "no_hp": "081234567890",
+      "status": "Tetap"
+    },
+    {
+      "nik": "3201010101010002",
+      "nama": "Julianda Saputra",
+      "no_kk": "3201011111111112",
+      "tempat_lahir": "Bandung",
+      "tanggal_lahir": "1990-05-15",
+      "jenis_kelamin": "L",
+      "alamat": "Jl. Merdeka No. 2",
+      "rt": "01",
+      "rw": "05",
+      "no_hp": "0895386105337",
+      "status": "Kontrak/Kos"
+    },
+    {
+      "nik": "3201010101010003",
+      "nama": "Siti Aminah",
+      "no_kk": "3201011111111113",
+      "tempat_lahir": "Surabaya",
+      "tanggal_lahir": "1985-08-20",
+      "jenis_kelamin": "P",
+      "alamat": "Jl. Pemuda No. 10",
+      "rt": "02",
+      "rw": "05",
+      "no_hp": "085612345678",
+      "status": "Tetap"
+    },
+    {
+      "nik": "3201010101010004",
+      "nama": "Rian Pratama",
+      "no_kk": "3201011111111111",
+      "tempat_lahir": "Jakarta",
+      "tanggal_lahir": "2018-04-10",
+      "jenis_kelamin": "L",
+      "alamat": "Jl. Merdeka No. 1",
+      "rt": "01",
+      "rw": "05",
+      "no_hp": "-",
+      "status": "Tetap"
+    },
+    {
+      "nik": "3201010101010005",
+      "nama": "Putri Maharani",
+      "no_kk": "3201011111111113",
+      "tempat_lahir": "Surabaya",
+      "tanggal_lahir": "2010-09-12",
+      "jenis_kelamin": "P",
+      "alamat": "Jl. Pemuda No. 10",
+      "rt": "02",
+      "rw": "05",
+      "no_hp": "085712349999",
+      "status": "Tetap"
+    },
+    {
+      "nik": "3201010101010006",
+      "nama": "H. Achmad Syafei",
+      "no_kk": "3201011111111114",
+      "tempat_lahir": "Semarang",
+      "tanggal_lahir": "1958-03-05",
+      "jenis_kelamin": "L",
+      "alamat": "Jl. Merdeka No. 8",
+      "rt": "01",
+      "rw": "05",
+      "no_hp": "081388776655",
+      "status": "Tetap"
+    },
+    {
+      "nik": "3201010101010007",
+      "nama": "Dewi Lestari",
+      "no_kk": "3201011111111115",
+      "tempat_lahir": "Yogyakarta",
+      "tanggal_lahir": "1998-11-22",
+      "jenis_kelamin": "P",
+      "alamat": "Jl. Pemuda No. 15",
+      "rt": "02",
+      "rw": "05",
+      "no_hp": "081277665544",
+      "status": "Kontrak/Kos"
+    }
+  ],
+  "wilayah": [
+    {
+      "id": "RT01-RW05",
+      "rt": "01",
+      "rw": "05",
+      "nama_ketua_rt": "Ahmad Fauzi",
+      "kontak": "081298765432",
+      "keterangan": "Mencakup Blok A1 - Blok B10, Pos Satpam Utama"
+    },
+    {
+      "id": "RT02-RW05",
+      "rt": "02",
+      "rw": "05",
+      "nama_ketua_rt": "Eko Prasetyo",
+      "kontak": "085612345678",
+      "keterangan": "Mencakup Blok C1 - Blok D12, Area Taman Bermain"
+    },
+    {
+      "id": "RT03-RW05",
+      "rt": "03",
+      "rw": "05",
+      "nama_ketua_rt": "Bpk. Hendra Wijaya",
+      "kontak": "087812345678",
+      "keterangan": "Mencakup Blok E1 - Blok F15, Lapangan Voli"
+    }
+  ],
+  "pelayanan": [
+    {
+      "id": "SRT-20260901-1001",
+      "jenis_pelayanan": "Surat Keterangan Tidak Mampu (SKTM)",
+      "nik_pemohon": "3201010101010002",
+      "tanggal_pengajuan": "2026-09-01T08:00:00Z",
+      "keperluan": "Pengajuan SKTM untuk Persyaratan Beasiswa Sekolah / Bantuan Sosial",
+      "dokumen_pendukung": "KTP, KK, Bukti Penghasilan / Slip Gaji / Foto Rumah",
+      "status": "Menunggu Verifikasi RT",
+      "catatan_rt": "",
+      "catatan_rw": "",
+      "tanggal_selesai": null
+    },
+    {
+      "id": "SRT-20260902-1002",
+      "jenis_pelayanan": "Surat Keterangan Domisili",
+      "nik_pemohon": "3201010101010003",
+      "tanggal_pengajuan": "2026-09-02T09:00:00Z",
+      "keperluan": "Pembuatan Rekening Bank",
+      "dokumen_pendukung": "KTP, KK",
+      "status": "Selesai",
+      "catatan_rt": "Sesuai domisili",
+      "catatan_rw": "Disetujui",
+      "tanggal_selesai": "2026-09-03T10:00:00Z"
+    }
+  ],
+  "pengaduan": [
+    {
+      "id": "ADU-1709420000000",
+      "judul": "Lampu Jalan Mati di RT 01",
+      "kategori": "Infrastruktur",
+      "deskripsi": "Lampu jalan utama di depan pertigaan RT 01 mati sejak 3 hari yang lalu. Mohon segera diperbaiki karena jalanan menjadi sangat gelap.",
+      "lokasi": "Pertigaan Utama RT 01",
+      "lampiran": "lampu_mati.jpg",
+      "status": "Baru",
+      "tanggal_pengaduan": "2026-09-02T08:30:00Z",
+      "nik_pelapor": "3201010101010001",
+      "nama_pelapor": "Budi Santoso",
+      "tanggapan": []
+    },
+    {
+      "id": "ADU-1709420000001",
+      "judul": "Tumpukan Sampah",
+      "kategori": "Kebersihan",
+      "deskripsi": "Ada tumpukan sampah yang belum diangkut di ujung jalan gang.",
+      "lokasi": "Gang Merdeka",
+      "lampiran": "",
+      "status": "Diproses",
+      "tanggal_pengaduan": "2026-09-01T14:15:00Z",
+      "nik_pelapor": "3201010101010002",
+      "nama_pelapor": "Agus",
+      "tanggapan": [
+        {
+          "penanggap": "Bapak Ketua RW",
+          "role": "Ketua RW",
+          "pesan": "Terima kasih laporannya, sedang kami koordinasikan dengan petugas kebersihan.",
+          "tanggal": "2026-09-01T16:00:00Z"
+        }
+      ]
+    }
+  ],
+  "kegiatan": [
+    {
+      "id": "KEG-1",
+      "nama": "Rapat Koordinasi RT/RW",
+      "kategori": "Rapat",
+      "tanggal": "2026-09-15",
+      "waktu": "19:30 WIB",
+      "lokasi": "Balai Warga RW 05",
+      "status": "Akan Datang",
+      "penyelenggara": "Ketua RW 05",
+      "deskripsi": "Pembahasan program kerja bulanan, evaluasi ketertiban lingkungan, dan pelaporan kas RW."
+    },
+    {
+      "id": "KEG-2",
+      "nama": "Kerja Bakti Bulanan Lingkungan",
+      "kategori": "Kerja Bakti",
+      "tanggal": "2026-09-05",
+      "waktu": "07:00 WIB",
+      "lokasi": "Area Balai Warga & Lapangan Olahraga",
+      "status": "Selesai",
+      "penyelenggara": "Pengurus RT 01 & RT 02",
+      "deskripsi": "Pembersihan gorong-gorong, pengangkutan sampah, dan pemangkasan dahan pohon rawan tumbang."
+    },
+    {
+      "id": "KEG-3",
+      "nama": "Posyandu Balita & Lansia Melati",
+      "kategori": "Kesehatan",
+      "tanggal": "2026-09-20",
+      "waktu": "08:30 WIB",
+      "lokasi": "Poskesdes Balai RW 05",
+      "status": "Akan Datang",
+      "penyelenggara": "Kader PKK & Puskesmas",
+      "deskripsi": "Penimbangan balita, imunisasi berkala, pemeriksaan tensi gratis, serta pembagian makanan bergizi."
+    },
+    {
+      "id": "KEG-4",
+      "nama": "Senam Sehat Warga Akhir Pekan",
+      "kategori": "Olahraga",
+      "tanggal": "2026-09-27",
+      "waktu": "06:00 WIB",
+      "lokasi": "Lapangan Olahraga RW 05",
+      "status": "Akan Datang",
+      "penyelenggara": "Karang Taruna RW 05",
+      "deskripsi": "Senam aerobik bersama seluruh warga RW 05 untuk menjaga kebugaran jasmani dan silaturahmi."
+    }
+  ],
+  "pengumuman": [
+    {
+      "id": "INFO-1709420000000",
+      "judul": "Kerja Bakti Bulanan Bersama",
+      "isi": "Diinformasikan kepada seluruh warga RW 05, kita akan mengadakan kegiatan kerja bakti bulanan pada hari Minggu ini di area balai warga dan lapangan olahraga.",
+      "tanggal_dibuat": "2026-09-01T10:00:00Z",
+      "penulis": "Bapak Ketua RW",
+      "kategori": "Kegiatan",
+      "status_publikasi": "Published",
+      "lampiran": "Jadwal_Alat_Kebersihan.pdf"
+    }
+  ],
+  "kas": [
+    {
+      "id": "KAS-1709420000000",
+      "jenis": "Pemasukan",
+      "tipe": "Iuran Keamanan",
+      "nominal": 50000,
+      "tanggal": "2026-09-01T10:00:00Z",
+      "keterangan": "Iuran Keamanan warga Agus (Bulan September)",
+      "rt": "01",
+      "rw": "05"
+    },
+    {
+      "id": "KAS-1709420000001",
+      "jenis": "Pengeluaran",
+      "tipe": "Infrastruktur",
+      "nominal": 150000,
+      "tanggal": "2026-09-05T09:00:00Z",
+      "keterangan": "Perbaikan Lampu Gang RT 01",
+      "rt": "01",
+      "rw": "05"
+    }
+  ],
+  "ai_config": {
+    "enabled": true,
+    "provider": "NVIDIA",
+    "model": "meta/llama-3.2-11b-vision-instruct",
+    "connectionStatus": "Terhubung"
+  }
+}

@@ -252,23 +252,6 @@ const initialData = {
             tanggal_selesai: '2026-10-26T14:37:35+00:00'
         },
         {
-            id: 'SRT-20261026-4884',
-            no_berkas: 'SRT-20261026-4884',
-            jenis_pelayanan: 'Surat Keterangan Usaha (SKU)',
-            jenis_surat: 'Surat Keterangan Usaha (SKU)',
-            nik: '3201010101010002',
-            nik_pemohon: '3201010101010002',
-            nama_pemohon: 'Budi Santoso',
-            rt: '01',
-            rw: '05',
-            status: 'Ditolak RT',
-            keperluan: 'Pengajuan KUR Bank Mandiri untuk Modal Usaha Toko Kelontong',
-            tanggal_pengajuan: '2026-10-26T22:21:26+07:00',
-            catatan_rt: 'tidak ada foto - foto persyaratannya',
-            catatan_rw: '',
-            tanggal_selesai: '2026-10-26T22:25:21+07:00'
-        },
-        {
             id: 'SRT-20261026-5145',
             no_berkas: 'SRT-20261026-5145',
             jenis_pelayanan: 'Surat Keterangan Domisili',
@@ -992,8 +975,8 @@ export async function syncWithBackend() {
 
                 // Safely merge pelayanan collection: combine backend and local items
                 if (Array.isArray(database.pelayanan)) {
-                    const backendList = database.pelayanan.filter(p => p && p.id !== 'SRT-20260902-1002');
-                    const localList = Array.isArray(currentDb.pelayanan) ? currentDb.pelayanan.filter(p => p && p.id !== 'SRT-20260902-1002') : [];
+                    const backendList = database.pelayanan.filter(p => p && p.id !== 'SRT-20260902-1002' && p.id !== 'SRT-20261026-4884');
+                    const localList = Array.isArray(currentDb.pelayanan) ? currentDb.pelayanan.filter(p => p && p.id !== 'SRT-20260902-1002' && p.id !== 'SRT-20261026-4884') : [];
                     const mergedMap = new Map();
 
                     // Put backend items
@@ -1001,7 +984,7 @@ export async function syncWithBackend() {
 
                     // Keep local items, preserving full docs and new submissions
                     localList.forEach(p => {
-                        if (p && p.id && p.id !== 'SRT-20260902-1002') {
+                        if (p && p.id && p.id !== 'SRT-20260902-1002' && p.id !== 'SRT-20261026-4884') {
                             if (mergedMap.has(p.id)) {
                                 const bItem = mergedMap.get(p.id);
                                 const mergedDocs = (p.dokumen_pendukung && Array.isArray(p.dokumen_pendukung) && p.dokumen_pendukung.some(d => d && (d.data || d.url)))

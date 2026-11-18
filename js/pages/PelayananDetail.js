@@ -478,9 +478,24 @@ export function checkAccessPengajuan(pengajuan, currentUser) {
 
     const roleLower = String(currentUser.role || '').toLowerCase();
 
-    // 1. Pemohon warga pemilik pengajuan (sama untuk Warga RT 01 & RT 02)
-    const isPemohon = (cleanNikPengajuan && cleanNikPengajuan === cleanNikUser) ||
-        (Boolean(currentUser.nik) && String(pengajuan.nik || pengajuan.nik_pemohon || '').trim() === String(currentUser.nik).trim());
+    // 1. Pemohon warga pemilik pengajuan (diperlebar mencakup NIK, Username, atau Nama Pemohon)
+    const userNik = String(currentUser.nik || '').trim();
+    const itemNik = String(pengajuan.nik || pengajuan.nik_pemohon || '').trim();
+    const userUsername = String(currentUser.username || '').trim().toLowerCase();
+    const itemUsername = String(pengajuan.username || '').trim().toLowerCase();
+    const userNama = String(currentUser.nama || currentUser.name || '').trim().toLowerCase();
+    const itemNama = String(pengajuan.nama_pemohon || pengajuan.nama || '').trim().toLowerCase();
+
+    const matchNik = userNik && ((itemNik && itemNik === userNik) || (cleanNikPengajuan && cleanNikPengajuan === cleanNikUser));
+    const matchUsername = userUsername && itemUsername && (itemUsername === userUsername);
+    const matchNama = userNama && itemNama && (itemNama === userNama || itemNama.includes(userNama) || userNama.includes(itemNama));
+
+    const isPemohon = Boolean(matchNik || matchUsername || matchNama);
+
+    // Jika rolenya adalah warga, izinkan akses jika salah satu kondisi pemohon terpenuhi
+    if (roleLower === 'warga' || roleLower.includes('warga')) {
+        return isPemohon;
+    }
 
     // 2. Ketua RT di wilayah yang sama (misal RT 01 dengan RT 01, RT 02 dengan RT 02)
     const isRTWilayah = roleLower.includes('rt') && cleanRtPengajuan === cleanRtUser && Boolean(cleanRtUser);

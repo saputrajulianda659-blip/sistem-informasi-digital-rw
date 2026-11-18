@@ -80,9 +80,19 @@ export function getAllPelayanan() {
     if (user.role === ROLES.WARGA) {
         const userNik = String(user.nik || '').trim();
         const userNikClean = getCleanRT(userNik);
+        const userName = String(user.nama || user.name || '').trim().toLowerCase();
+        const userUsername = String(user.username || '').trim().toLowerCase();
+
         filtered = pelayanan.filter(item => {
             const itemNik = String(item.nik || item.nik_pemohon || '').trim();
-            return (itemNik && itemNik === userNik) || (userNikClean !== '' && getCleanRT(itemNik) === userNikClean);
+            const itemNama = String(item.nama_pemohon || item.nama || '').trim().toLowerCase();
+            const itemUsername = String(item.username || '').trim().toLowerCase();
+
+            const matchNik = userNik && ((itemNik && itemNik === userNik) || (userNikClean !== '' && itemNik !== '' && getCleanRT(itemNik) === userNikClean));
+            const matchUsername = userUsername && itemUsername && (itemUsername === userUsername);
+            const matchNama = userName && itemNama && (itemNama === userName);
+
+            return matchNik || matchUsername || matchNama;
         });
     } else if (user.role === ROLES.KETUA_RT) {
         const cleanUserRt = getCleanRT(user.rt);

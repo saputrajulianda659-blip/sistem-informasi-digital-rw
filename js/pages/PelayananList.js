@@ -64,9 +64,22 @@ export function getFilteredPelayananList() {
     const allPelayanan = getAllPelayanan();
 
     if (hash.includes('status-pengajuan') || user.role === ROLES.WARGA) {
-        return allPelayanan.filter(item =>
-            String(item.nik || item.nik_pemohon || '').trim() === String(user.nik || '').trim()
-        );
+        const userNik = String(user.nik || '').trim();
+        const userName = String(user.nama || user.name || '').trim().toLowerCase();
+        const userUsername = String(user.username || '').trim().toLowerCase();
+
+        return allPelayanan.filter(item => {
+            if (!item) return false;
+            const itemNik = String(item.nik || item.nik_pemohon || '').trim();
+            const itemNama = String(item.nama_pemohon || item.nama || '').trim().toLowerCase();
+            const itemUsername = String(item.username || '').trim().toLowerCase();
+
+            const matchNik = userNik && (itemNik === userNik);
+            const matchUsername = userUsername && itemUsername && (itemUsername === userUsername);
+            const matchNama = userName && itemNama && (itemNama === userName);
+
+            return matchNik || matchUsername || matchNama;
+        });
     } else if (hash.includes('verifikasi-pengajuan') || user.role === ROLES.KETUA_RT) {
         const userRT = String(user.rt || '').replace(/^0+/, '');
         return allPelayanan.filter(item => {

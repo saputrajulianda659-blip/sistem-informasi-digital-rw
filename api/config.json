@@ -1,0 +1,26 @@
+{
+    "email": {
+        "enabled": true,
+        "provider": "smtp",
+        "smtp_host": "smtp.gmail.com",
+        "smtp_port": 587,
+        "smtp_user": "maulanasaputra2187@gmail.com",
+        "smtp_pass": "iomlctxromokqsgr",
+        "from_email": "maulanasaputra2187@gmail.com",
+        "from_name": "Digital RW 05",
+        "status": "Terkonfigurasi",
+        "configured": true
+    },
+    "whatsapp": {
+        "enabled": true,
+        "provider": "fonnte",
+        "endpoint": "https:\/\/api.fonnte.com\/send",
+        "api_url": "https:\/\/api.fonnte.com\/send",
+        "api_token": "65G3LsBQrNkQLSV1F9Dc",
+        "access_token": "65G3LsBQrNkQLSV1F9Dc",
+        "phone_number_id": "fonnte_gateway",
+        "sender_number": "",
+        "status": "100% Siap Aktif",
+        "configured": true
+    }
+}

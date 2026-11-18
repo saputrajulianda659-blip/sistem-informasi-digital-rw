@@ -97,6 +97,9 @@ if ($action === 'register' || ($method === 'POST' && (isset($input['nik']) || is
         'role' => 'warga',
         'status_warga' => 'Tetap',
         'status' => 'Tetap',
+        'tempat_lahir' => trim($input['tempat_lahir'] ?? ''),
+        'tanggal_lahir' => trim($input['tanggal_lahir'] ?? ''),
+        'tempat_tanggal_lahir' => trim($input['tempat_tanggal_lahir'] ?? ''),
         'pekerjaan' => trim($input['pekerjaan'] ?? '-'),
         'agama' => trim($input['agama'] ?? '-'),
         'alamat' => trim($input['alamat'] ?? "RT {$rt} / RW {$rw}"),
@@ -106,16 +109,23 @@ if ($action === 'register' || ($method === 'POST' && (isset($input['nik']) || is
 
     // 4. Simpan ke array 'users'
     $newUserId = round(microtime(true) * 1000);
+    $username = trim($input['username'] ?? $nik);
+    if (empty($username)) $username = $nik;
     $newUser = [
         'id' => $newUserId,
         'name' => $nama,
-        'username' => $nik,
+        'username' => $username,
         'email' => $email,
         'role' => 'Warga',
         'rt' => $rt,
         'rw' => $rw,
         'nik' => $nik,
         'no_hp' => $no_hp,
+        'tempat_lahir' => trim($input['tempat_lahir'] ?? ''),
+        'tanggal_lahir' => trim($input['tanggal_lahir'] ?? ''),
+        'tempat_tanggal_lahir' => trim($input['tempat_tanggal_lahir'] ?? ''),
+        'pekerjaan' => trim($input['pekerjaan'] ?? '-'),
+        'agama' => trim($input['agama'] ?? '-'),
         'alamat' => $newWarga['alamat'],
         'status' => 'Aktif',
         'password' => $hashedPassword,

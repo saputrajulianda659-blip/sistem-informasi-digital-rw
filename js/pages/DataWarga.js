@@ -17,10 +17,10 @@ export function generateWargaRowHtml(w, canManage) {
         : '<span style="color: #94a3b8;">-</span>';
 
     const actionHtml = canManage ? `
-        <button class="btn btn-sm btn-edit-warga-modal" data-nik="${w.nik}" style="padding: 4px 8px; border: 1px solid #f59e0b; color: #b45309; background: #fffbeb; border-radius: 6px; font-size: 0.75rem; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 3px;" title="Edit Data Warga">
+        <button class="btn btn-sm btn-edit-warga-modal" data-nik="${w.nik}" style="padding: 4px 8px; border: 1px solid #f59e0b; color: #b45309; background: #fffbeb; border-radius: 6px; font-size: 0.75rem; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 3px; white-space: nowrap; flex-shrink: 0;" title="Edit Data Warga">
             <i class="ph ph-pencil-simple"></i> Edit
         </button>
-        <button class="btn btn-sm btn-delete-warga" data-nik="${w.nik}" data-nama="${w.nama}" data-rt="${w.rt || '01'}" data-rw="${w.rw || '05'}" style="padding: 4px 8px; border: 1px solid #fca5a5; color: #b91c1c; background: #fef2f2; border-radius: 6px; font-size: 0.75rem; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 3px;" title="Hapus Data">
+        <button class="btn btn-sm btn-delete-warga" data-nik="${w.nik}" data-nama="${w.nama}" data-rt="${w.rt || '01'}" data-rw="${w.rw || '05'}" style="padding: 4px 8px; border: 1px solid #fca5a5; color: #b91c1c; background: #fef2f2; border-radius: 6px; font-size: 0.75rem; font-weight: 600; cursor: pointer; display: inline-flex; align-items: center; gap: 3px; white-space: nowrap; flex-shrink: 0;" title="Hapus Data">
             <i class="ph ph-trash"></i> Hapus
         </button>
     ` : '';
@@ -29,24 +29,24 @@ export function generateWargaRowHtml(w, canManage) {
 
     return `
         <tr id="row-warga-${w.nik}" data-nik="${w.nik}" data-nama="${(w.nama || '').toLowerCase()}" data-rt="${w.rt}">
-            <td style="font-family: monospace; font-size: 0.775rem; font-weight: 700; color: #334155; padding: 7px 10px; white-space: nowrap;">${w.nik}</td>
-            <td style="padding: 7px 10px; max-width: 210px;">
-                <div style="font-weight: 700; color: #1e293b; font-size: 0.8125rem; line-height: 1.25;" class="warga-nama-text">${w.nama}</div>
+            <td style="font-family: monospace; font-size: 0.775rem; font-weight: 700; color: #334155; padding: 8px 12px; white-space: nowrap;">${w.nik}</td>
+            <td style="padding: 8px 12px; min-width: 180px;">
+                <div style="font-weight: 700; color: #1e293b; font-size: 0.8125rem; line-height: 1.35; word-break: break-word;" class="warga-nama-text">${w.nama}</div>
                 <div style="font-size: 0.7rem; color: #64748b; margin-top: 1px;">KK: ${w.no_kk || '-'}</div>
-                ${w.email ? `<div style="font-size: 0.7rem; color: #0284c7; display: flex; align-items: center; gap: 3px; margin-top: 1px; max-width: 190px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" title="${w.email}"><i class="ph ph-envelope" style="flex-shrink: 0;"></i> <span style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${w.email}</span></div>` : ''}
+                ${w.email ? `<div style="font-size: 0.7rem; color: #0284c7; display: flex; align-items: center; gap: 3px; margin-top: 1px; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" title="${w.email}"><i class="ph ph-envelope" style="flex-shrink: 0;"></i> <span style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${w.email}</span></div>` : ''}
             </td>
-            <td style="white-space: nowrap; padding: 7px 10px; font-size: 0.8rem;"><span style="font-weight: 700; color: #2563eb;">RT ${w.rt || '01'}</span> / RW ${w.rw || '05'}</td>
-            <td style="text-align: center; padding: 7px 10px; font-size: 0.8rem;">${w.jenis_kelamin === 'L' ? '<span class="badge-gender-l" style="color: #2563eb; font-weight: 700; background: #eff6ff; padding: 2px 6px; border-radius: 4px; border: 1px solid #dbeafe;">L</span>' : '<span class="badge-gender-p" style="color: #db2777; font-weight: 700; background: #fdf2f8; padding: 2px 6px; border-radius: 4px; border: 1px solid #fce7f3;">P</span>'}</td>
-            <td style="white-space: nowrap; padding: 7px 10px;">
+            <td style="white-space: nowrap; padding: 8px 12px; font-size: 0.8rem;"><span style="font-weight: 700; color: #2563eb;">RT ${w.rt || '01'}</span> / RW ${w.rw || '05'}</td>
+            <td style="text-align: center; padding: 8px 12px; font-size: 0.8rem;">${w.jenis_kelamin === 'L' ? '<span class="badge-gender-l" style="color: #2563eb; font-weight: 700; background: #eff6ff; padding: 2px 6px; border-radius: 4px; border: 1px solid #dbeafe;">L</span>' : '<span class="badge-gender-p" style="color: #db2777; font-weight: 700; background: #fdf2f8; padding: 2px 6px; border-radius: 4px; border: 1px solid #fce7f3;">P</span>'}</td>
+            <td style="white-space: nowrap; padding: 8px 12px;">
                 <div style="font-size: 0.775rem; color: #1e293b; display: flex; align-items: center;">
                     <span class="warga-birth-text">${birthFormatted}</span>
                     ${ageBadge}
                 </div>
             </td>
-            <td style="text-align: center; white-space: nowrap; padding: 7px 10px;">${statusBadge}</td>
-            <td style="padding: 7px 10px; text-align: center;">
-                <div class="flex gap-1" style="justify-content: center; align-items: center; flex-wrap: nowrap;">
-                    <a href="#/data-warga/detail?nik=${w.nik}" class="btn btn-sm btn-detail-warga" onclick="sessionStorage.setItem('dataWargaScrollPos', window.scrollY || document.documentElement.scrollTop || 0);" style="padding: 4px 7px; border: 1px solid #cbd5e1; color: #0284c7; background: #f0f9ff; border-radius: 6px; font-size: 0.75rem; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center;" title="Lihat Detail"><i class="ph ph-eye"></i></a>
+            <td style="text-align: center; white-space: nowrap; padding: 8px 12px;">${statusBadge}</td>
+            <td style="padding: 8px 12px; text-align: center; white-space: nowrap;">
+                <div class="flex gap-1" style="justify-content: center; align-items: center; flex-wrap: nowrap; display: inline-flex; white-space: nowrap;">
+                    <a href="#/data-warga/detail?nik=${w.nik}" class="btn btn-sm btn-detail-warga" onclick="sessionStorage.setItem('dataWargaScrollPos', window.scrollY || document.documentElement.scrollTop || 0);" style="padding: 4px 7px; border: 1px solid #cbd5e1; color: #0284c7; background: #f0f9ff; border-radius: 6px; font-size: 0.75rem; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; flex-shrink: 0;" title="Lihat Detail"><i class="ph ph-eye"></i></a>
                     ${actionHtml}
                 </div>
             </td>
@@ -111,17 +111,17 @@ export function renderDataWarga() {
                 </div>
             </div>
 
-            <div class="card" style="overflow-x: auto; padding: 0; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.03);">
-                <table class="data-table table-compact-warga" style="width: 100%; border-collapse: collapse;">
+            <div class="card table-responsive" style="width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; padding: 0; background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.03);">
+                <table class="data-table table-compact-warga" style="width: 100%; min-width: 880px; border-collapse: collapse;">
                     <thead>
                         <tr style="background: #f8fafc; border-bottom: 1px solid #e2e8f0; text-align: left;">
-                            <th style="width: 135px; padding: 8px 10px; font-size: 0.75rem; font-weight: 700; color: #475569; white-space: nowrap;">NIK</th>
-                            <th style="min-width: 175px; max-width: 220px; padding: 8px 10px; font-size: 0.75rem; font-weight: 700; color: #475569; white-space: nowrap;">NAMA LENGKAP</th>
-                            <th style="width: 85px; padding: 8px 10px; font-size: 0.75rem; font-weight: 700; color: #475569; white-space: nowrap;">WILAYAH</th>
-                            <th style="width: 45px; text-align: center; padding: 8px 10px; font-size: 0.75rem; font-weight: 700; color: #475569; white-space: nowrap;">L/P</th>
-                            <th style="width: 155px; padding: 8px 10px; font-size: 0.75rem; font-weight: 700; color: #475569; white-space: nowrap;">TANGGAL LAHIR / UMUR</th>
-                            <th style="width: 95px; text-align: center; padding: 8px 10px; font-size: 0.75rem; font-weight: 700; color: #475569; white-space: nowrap;">STATUS</th>
-                            <th style="width: 160px; text-align: center; padding: 8px 10px; font-size: 0.75rem; font-weight: 700; color: #475569; white-space: nowrap;">AKSI</th>
+                            <th style="min-width: 130px; padding: 10px 12px; font-size: 0.75rem; font-weight: 700; color: #475569; white-space: nowrap;">NIK</th>
+                            <th style="min-width: 200px; padding: 10px 12px; font-size: 0.75rem; font-weight: 700; color: #475569; white-space: nowrap;">NAMA LENGKAP</th>
+                            <th style="min-width: 95px; padding: 10px 12px; font-size: 0.75rem; font-weight: 700; color: #475569; white-space: nowrap;">WILAYAH</th>
+                            <th style="min-width: 50px; text-align: center; padding: 10px 12px; font-size: 0.75rem; font-weight: 700; color: #475569; white-space: nowrap;">L/P</th>
+                            <th style="min-width: 160px; padding: 10px 12px; font-size: 0.75rem; font-weight: 700; color: #475569; white-space: nowrap;">TANGGAL LAHIR / UMUR</th>
+                            <th style="min-width: 95px; text-align: center; padding: 10px 12px; font-size: 0.75rem; font-weight: 700; color: #475569; white-space: nowrap;">STATUS</th>
+                            <th style="min-width: 165px; text-align: center; padding: 10px 12px; font-size: 0.75rem; font-weight: 700; color: #475569; white-space: nowrap;">AKSI</th>
                         </tr>
                     </thead>
                     <tbody id="wargaTableBody">

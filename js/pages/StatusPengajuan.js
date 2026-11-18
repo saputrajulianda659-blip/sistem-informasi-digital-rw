@@ -14,18 +14,47 @@ export function getWargaPelayananList(customList = null) {
     const currentUser = getCurrentUser();
     if (!currentUser) return [];
 
+    // Purge data dummy Budi Santoso jika masih tersisa di browser localStorage
+    try {
+        if (typeof localStorage !== 'undefined') {
+            const rawDb = localStorage.getItem('digitalrw_db');
+            if (rawDb && rawDb.includes('SRT-20261026-4884')) {
+                const parsedDb = JSON.parse(rawDb);
+                if (Array.isArray(parsedDb.pelayanan)) {
+                    parsedDb.pelayanan = parsedDb.pelayanan.filter(p => p && p.id !== 'SRT-20261026-4884');
+                    localStorage.setItem('digitalrw_db', JSON.stringify(parsedDb));
+                }
+            }
+        }
+    } catch (e) {}
+
     const dataPelayanan = Array.isArray(customList) ? customList : (getCollection('pelayanan') || []);
-    // HAPUS logic array fallback default (dummy data SRT-20260902-1002 dsb)
-    const cleanPelayanan = dataPelayanan.filter(item => item && item.id !== 'SRT-20260902-1002');
+    // HAPUS logic array fallback default (dummy data SRT-20260902-1002, SRT-20261026-4884 dsb)
+    const cleanPelayanan = dataPelayanan.filter(item => item && item.id !== 'SRT-20260902-1002' && item.id !== 'SRT-20261026-4884');
     
     const userNik = String(currentUser.nik || '').trim();
     const userNikClean = getCleanRT(userNik);
+    const userName = String(currentUser.nama || currentUser.name || '').trim().toLowerCase();
+    const userUsername = String(currentUser.username || '').trim().toLowerCase();
 
-    // Filter HANYA berkas yang NIK-nya sama dengan akun warga login (Sama untuk Warga RT 01 & RT 02):
-    const listSaya = cleanPelayanan.filter(item => {
-        if (!item) return false;
-        const itemNik = String(item.nik || item.nik_pemohon || '').trim();
-        return (itemNik && itemNik === userNik) || (userNikClean !== '' && getCleanRT(itemNik) === userNikClean);
+    // Filter ketat berkas milik akun warga login:
+    const listSaya = cleanPelayanan.filter(p => {
+        if (!p) return false;
+        const pNama = String(p.nama_pemohon || p.nama || '').trim().toLowerCase();
+        const pUsername = String(p.username || '').trim().toLowerCase();
+        const pNik = String(p.nik_pemohon || p.nik || '').trim();
+
+        // Cegah kebocoran: data pemohon lain (seperti Budi Santoso di akun Julianda) dilarang muncul
+        if (pNama && userName && pNama !== userName) {
+            return false;
+        }
+
+        // Logika strict: p.username === currentUser.username || p.nik_pemohon === currentUser.nik
+        const matchStrict = (userUsername && pUsername && pUsername === userUsername) ||
+                            (userNik && pNik && (pNik === userNik || (userNikClean !== '' && getCleanRT(pNik) === userNikClean)));
+        const matchNama = userName && pNama && (pNama === userName);
+
+        return matchStrict || matchNama;
     });
 
     // Urutkan dari yang terbaru (created_at descending)

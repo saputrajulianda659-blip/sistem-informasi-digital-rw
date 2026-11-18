@@ -137,8 +137,25 @@ function getDashboardData(user) {
         }
 
         // Filter Warga: berkas milik user warga login
+        if (p.id === 'SRT-20261026-4884') {
+            return;
+        }
         const pNikClean = normRT(pNik);
-        if (userNik && (pNik === userNik || (userNikClean !== '' && pNikClean === userNikClean))) {
+        const pNama = String(p.nama_pemohon || p.nama || '').trim().toLowerCase();
+        const pUsername = String(p.username || '').trim().toLowerCase();
+        const userName = String(user?.nama || user?.name || '').trim().toLowerCase();
+        const userUsername = String(user?.username || '').trim().toLowerCase();
+
+        // Cegah kebocoran: berkas pemohon lain (seperti Budi Santoso) tidak boleh masuk jika nama berbeda
+        if (pNama && userName && pNama !== userName) {
+            return;
+        }
+
+        const matchNik = userNik && (pNik === userNik || (userNikClean !== '' && pNikClean === userNikClean));
+        const matchUsername = userUsername && pUsername && (pUsername === userUsername);
+        const matchNama = userName && pNama && (pNama === userName);
+
+        if (matchNik || matchUsername || matchNama) {
             pelayananSaya.push(p);
         }
     });
@@ -161,10 +178,14 @@ function getDashboardData(user) {
 
     pengaduanSaya.sort((a, b) => new Date(b.tanggal_pengaduan || b.createdAt || 0) - new Date(a.tanggal_pengaduan || a.createdAt || 0));
 
+    // Pisahkan: pengajuan AKTIF (belum selesai/ditolak) untuk angka besar (0 saat ini)
     const pengajuanAktif = pelayananSaya.filter(p => {
         const s = String(p.status || '').toLowerCase();
         return !s.includes('selesai') && !s.includes('ditolak');
     }).length;
+
+    // Total keseluruhan pengajuan milik user untuk subtitle kecil (Total 6 Diajukan saat ini)
+    const totalPengajuanWarga = pelayananSaya.length;
 
     const pengaduanAktif = pengaduanSaya.filter(p =>
         p.status !== STATUS_PENGADUAN.SELESAI &&
@@ -730,7 +751,7 @@ function renderWargaDashboard(user, data) {
         <div class="stats-grid-2 mb-6">
             <div class="card stat-card">
                 <div class="stat-info">
-                    <p>Pengajuan Surat Aktif</p>
+                    <p>Total Surat Diajukan</p>
                     <h3 id="statPengajuanAktifWarga">${pengajuanAktif}</h3>
                     <div style="margin-top: 6px;">
                         <span id="badgePengajuanAktifWarga" class="stat-status stat-status-yellow"><i class="ph-bold ph-clock"></i> Total ${pelayananSaya.length} Diajukan</span>
@@ -1148,7 +1169,7 @@ export function setupDashboardEvents() {
             const containerLatestEl = document.getElementById('containerLatestPelayananWarga');
 
             if (statPengajuanEl) {
-                statPengajuanEl.textContent = freshData.pengajuanAktif;
+                statPengajuanEl.textContent = `${freshData.pengajuanAktif}`;
             }
             if (badgePengajuanEl) {
                 badgePengajuanEl.innerHTML = `<i class="ph-bold ph-clock"></i> Total ${freshData.pelayananSaya.length} Diajukan`;

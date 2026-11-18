@@ -371,13 +371,23 @@ input, select, textarea {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    transition: margin-left var(--transition-normal);
+    transition: margin-left var(--transition-normal), width var(--transition-normal);
     width: calc(100% - 260px);
 }
 
-.main-content.expanded {
-    margin-left: 0;
-    width: 100%;
+.main-content.expanded,
+body.sidebar-collapsed .main-content,
+.main-layout.sidebar-collapsed .main-content {
+    margin-left: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    flex: 1 1 100% !important;
+}
+
+body.sidebar-collapsed .page-content,
+.main-layout.sidebar-collapsed .page-content {
+    max-width: 100% !important;
+    width: 100% !important;
 }
 
 .navbar {
@@ -3060,12 +3070,13 @@ html.dark .login-header p {
    ========================================================================== */
 .table-compact-warga {
     width: 100%;
+    min-width: 880px;
     table-layout: auto;
     border-collapse: collapse;
 }
 
 .table-compact-warga th {
-    padding: 8px 10px !important;
+    padding: 10px 12px !important;
     font-size: 0.75rem !important; /* ~12px */
     font-weight: 700 !important;
     text-transform: uppercase !important;
@@ -3074,9 +3085,20 @@ html.dark .login-header p {
 }
 
 .table-compact-warga td {
-    padding: 7px 10px !important;
+    padding: 8px 12px !important;
     font-size: 0.8125rem !important; /* ~13px */
     vertical-align: middle !important;
+}
+
+.table-compact-warga .col-aksi,
+.table-compact-warga td:last-child {
+    white-space: nowrap !important;
+}
+
+.table-compact-warga .col-aksi .btn,
+.table-compact-warga td:last-child .btn {
+    white-space: nowrap !important;
+    flex-shrink: 0 !important;
 }
 
 /* Dark Mode Overrides for Data Warga Compact Table */

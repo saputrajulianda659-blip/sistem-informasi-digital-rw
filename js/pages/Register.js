@@ -52,6 +52,59 @@ export function renderRegister() {
                         <div id="namaError" style="color: var(--danger-color); font-size: 0.72rem; margin-top: 0.25rem; display: none;">Nama lengkap wajib diisi</div>
                     </div>
 
+                    <!-- Baris: Username Akun -->
+                    <div class="form-group" style="margin-bottom: 1rem;">
+                        <label class="form-label" for="username" style="font-size: 0.8125rem; font-weight: 700;">
+                            Username <span class="text-danger">*</span>
+                        </label>
+                        <input type="text" id="username" name="username" class="form-input" placeholder="Buat username akun Anda (contoh: warga01)" required autocomplete="username">
+                        <div id="usernameError" style="color: var(--danger-color); font-size: 0.72rem; margin-top: 0.25rem; display: none;">Username wajib diisi (minimal 3 karakter)</div>
+                    </div>
+
+                    <!-- Baris: Tempat & Tanggal Lahir -->
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                        <div class="form-group" style="margin-bottom: 0;">
+                            <label class="form-label" for="tempatLahir" style="font-size: 0.8125rem; font-weight: 700;">
+                                Tempat Lahir <span class="text-danger">*</span>
+                            </label>
+                            <input type="text" id="tempatLahir" name="tempatLahir" class="form-input" placeholder="Kota / Kabupaten lahir" required>
+                            <div id="tempatLahirError" style="color: var(--danger-color); font-size: 0.72rem; margin-top: 0.25rem; display: none;">Tempat lahir wajib diisi</div>
+                        </div>
+
+                        <div class="form-group" style="margin-bottom: 0;">
+                            <label class="form-label" for="tanggalLahir" style="font-size: 0.8125rem; font-weight: 700;">
+                                Tanggal Lahir <span class="text-danger">*</span>
+                            </label>
+                            <input type="date" id="tanggalLahir" name="tanggalLahir" class="form-input" required>
+                            <div id="tanggalLahirError" style="color: var(--danger-color); font-size: 0.72rem; margin-top: 0.25rem; display: none;">Tanggal lahir wajib diisi</div>
+                        </div>
+                    </div>
+
+                    <!-- Baris: Pekerjaan & Agama -->
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                        <div class="form-group" style="margin-bottom: 0;">
+                            <label class="form-label" for="pekerjaan" style="font-size: 0.8125rem; font-weight: 700;">
+                                Pekerjaan <span class="text-danger">*</span>
+                            </label>
+                            <input type="text" id="pekerjaan" name="pekerjaan" class="form-input" placeholder="Contoh: Karyawan Swasta, PNS, Pelajar" required>
+                            <div id="pekerjaanError" style="color: var(--danger-color); font-size: 0.72rem; margin-top: 0.25rem; display: none;">Pekerjaan wajib diisi</div>
+                        </div>
+
+                        <div class="form-group" style="margin-bottom: 0;">
+                            <label class="form-label" for="agama" style="font-size: 0.8125rem; font-weight: 700;">
+                                Agama <span class="text-danger">*</span>
+                            </label>
+                            <select id="agama" name="agama" class="form-input" required>
+                                <option value="Islam">Islam</option>
+                                <option value="Kristen">Kristen</option>
+                                <option value="Katolik">Katolik</option>
+                                <option value="Hindu">Hindu</option>
+                                <option value="Buddha">Buddha</option>
+                                <option value="Konghucu">Konghucu</option>
+                            </select>
+                        </div>
+                    </div>
+
                     <!-- Baris 3: Pilihan RT & Jenis Kelamin -->
                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
                         <div class="form-group" style="margin-bottom: 0;">
@@ -169,6 +222,11 @@ export function setupRegisterEvents() {
         const nik = (nikInput?.value || '').trim();
         const no_kk = (noKkInput?.value || '').trim();
         const nama = (document.getElementById('regNama')?.value || '').trim();
+        const usernameVal = (document.getElementById('username')?.value || '').trim();
+        const tempatLahirVal = (document.getElementById('tempatLahir')?.value || '').trim();
+        const tanggalLahirVal = (document.getElementById('tanggalLahir')?.value || '').trim();
+        const pekerjaanVal = (document.getElementById('pekerjaan')?.value || '').trim();
+        const agamaVal = (document.getElementById('agama')?.value || 'Islam').trim();
         const rt = (document.getElementById('regRt')?.value || '01').trim();
         const rw = '05';
         const jk = (document.getElementById('regJk')?.value || 'L').trim();
@@ -183,6 +241,10 @@ export function setupRegisterEvents() {
         const nikError = document.getElementById('nikError');
         const noKkError = document.getElementById('noKkError');
         const namaError = document.getElementById('namaError');
+        const usernameError = document.getElementById('usernameError');
+        const tempatLahirError = document.getElementById('tempatLahirError');
+        const tanggalLahirError = document.getElementById('tanggalLahirError');
+        const pekerjaanError = document.getElementById('pekerjaanError');
         const hpError = document.getElementById('hpError');
         const emailError = document.getElementById('emailError');
         const passError = document.getElementById('passwordError');
@@ -192,6 +254,10 @@ export function setupRegisterEvents() {
         if (nikError) nikError.style.display = 'none';
         if (noKkError) noKkError.style.display = 'none';
         if (namaError) namaError.style.display = 'none';
+        if (usernameError) usernameError.style.display = 'none';
+        if (tempatLahirError) tempatLahirError.style.display = 'none';
+        if (tanggalLahirError) tanggalLahirError.style.display = 'none';
+        if (pekerjaanError) pekerjaanError.style.display = 'none';
         if (hpError) hpError.style.display = 'none';
         if (emailError) emailError.style.display = 'none';
         if (passError) passError.style.display = 'none';
@@ -234,6 +300,49 @@ export function setupRegisterEvents() {
             return;
         }
 
+        // 3b. Validasi Username
+        if (!usernameVal || usernameVal.length < 3) {
+            if (usernameError) {
+                usernameError.textContent = "Username wajib diisi minimal 3 karakter.";
+                usernameError.style.display = 'block';
+            }
+            showError("Username wajib diisi minimal 3 karakter.");
+            return;
+        }
+
+        if (/\s/.test(usernameVal)) {
+            if (usernameError) {
+                usernameError.textContent = "Username tidak boleh mengandung spasi.";
+                usernameError.style.display = 'block';
+            }
+            showError("Username tidak boleh mengandung spasi.");
+            return;
+        }
+
+        // 3c. Validasi Tempat Lahir & Tanggal Lahir
+        if (!tempatLahirVal) {
+            if (tempatLahirError) tempatLahirError.style.display = 'block';
+            showError("Tempat lahir wajib diisi.");
+            return;
+        }
+
+        if (!tanggalLahirVal) {
+            if (tanggalLahirError) tanggalLahirError.style.display = 'block';
+            showError("Tanggal lahir wajib diisi.");
+            return;
+        }
+
+        // 3d. Validasi Pekerjaan
+        if (!pekerjaanVal) {
+            if (pekerjaanError) pekerjaanError.style.display = 'block';
+            showError("Pekerjaan wajib diisi.");
+            return;
+        }
+
+        const tempatTanggalLahirVal = (tempatLahirVal && tanggalLahirVal)
+            ? `${tempatLahirVal}, ${tanggalLahirVal}`
+            : (tempatLahirVal || tanggalLahirVal || '-');
+
         // 4. Validasi WhatsApp / HP
         const cleanHp = no_hp.replace(/[\s-]/g, '');
         if (!/^[0-9+]{9,16}$/.test(cleanHp)) {
@@ -267,6 +376,17 @@ export function setupRegisterEvents() {
         const localWarga = getCollection('warga') || [];
         const localUsers = getCollection('users') || [];
 
+        const isDuplicateUsername = localUsers.some(u => String(u.username || '').trim().toLowerCase() === usernameVal.toLowerCase()) ||
+                                    localWarga.some(w => String(w.username || '').trim().toLowerCase() === usernameVal.toLowerCase());
+        if (isDuplicateUsername) {
+            if (usernameError) {
+                usernameError.textContent = "Username sudah digunakan oleh akun lain.";
+                usernameError.style.display = 'block';
+            }
+            showError("Username sudah terdaftar. Silakan gunakan username lain.");
+            return;
+        }
+
         const isDuplicateNik = localWarga.some(w => String(w.nik || '').trim() === nik) ||
                                localUsers.some(u => String(u.nik || '').trim() === nik);
         const isDuplicateEmail = localWarga.some(w => String(w.email || '').trim().toLowerCase() === email) ||
@@ -293,6 +413,12 @@ export function setupRegisterEvents() {
             nik: nik,
             no_kk: no_kk,
             nama: nama,
+            username: usernameVal,
+            tempat_lahir: tempatLahirVal,
+            tanggal_lahir: tanggalLahirVal,
+            tempat_tanggal_lahir: tempatTanggalLahirVal,
+            pekerjaan: pekerjaanVal,
+            agama: agamaVal,
             rt: rt,
             rw: rw,
             telepon: no_hp,
@@ -307,13 +433,17 @@ export function setupRegisterEvents() {
         };
 
         try {
-            // Panggil API Backend (auth.php / warga.php)
+            // Panggil API Backend jika tersedia (auth.php / warga.php)
             let res = null;
             try {
                 res = await callBackendApi('auth.php', registerPayload, 'POST');
             } catch (errAuth) {
-                // Fallback ke warga.php jika auth.php gagal
-                res = await callBackendApi('warga.php', registerPayload, 'POST');
+                // Fallback ke warga.php jika auth.php gagal atau static hosting (GitHub Pages)
+                try {
+                    res = await callBackendApi('warga.php', registerPayload, 'POST');
+                } catch (errStatic) {
+                    console.info("Mode static hosting/GitHub Pages: pendaftaran disimpan ke localStorage.");
+                }
             }
 
             if (res && res.error) {
@@ -325,6 +455,12 @@ export function setupRegisterEvents() {
                 nik: nik,
                 no_kk: no_kk,
                 nama: nama,
+                username: usernameVal,
+                tempat_lahir: tempatLahirVal,
+                tanggal_lahir: tanggalLahirVal,
+                tempat_tanggal_lahir: tempatTanggalLahirVal,
+                pekerjaan: pekerjaanVal,
+                agama: agamaVal,
                 rt: rt,
                 rw: rw,
                 telepon: no_hp,
@@ -335,8 +471,6 @@ export function setupRegisterEvents() {
                 role: 'warga',
                 status_warga: 'Tetap',
                 status: 'Tetap',
-                pekerjaan: '-',
-                agama: 'Islam',
                 alamat: `RT ${rt} / RW ${rw}`,
                 created_at: nowIso
             };
@@ -345,7 +479,12 @@ export function setupRegisterEvents() {
             const newUserItem = {
                 id: newUserId,
                 name: nama,
-                username: nik,
+                username: usernameVal,
+                tempat_lahir: tempatLahirVal,
+                tanggal_lahir: tanggalLahirVal,
+                tempat_tanggal_lahir: tempatTanggalLahirVal,
+                pekerjaan: pekerjaanVal,
+                agama: agamaVal,
                 email: email,
                 role: 'Warga',
                 rt: rt,
@@ -372,7 +511,7 @@ export function setupRegisterEvents() {
 
             // Notifikasi sukses dan redirect otomatis ke #/login
             await showAlertDialog(
-                "Pendaftaran berhasil! Silakan login menggunakan NIK dan password Anda.",
+                `Pendaftaran berhasil! Silakan login menggunakan username "${usernameVal}" atau email Anda.`,
                 "success",
                 "Pendaftaran Berhasil"
             );
